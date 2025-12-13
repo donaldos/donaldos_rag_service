@@ -8,3 +8,4 @@ from .chunking_nltk_text_splitter import CNLTKTextSplitter
 from .chunking_konlp_text_splitter import CKONLPTextSplitter
 from .chunking_gpt2tokenizerfaset_text_splitter import CGPT2TokenizerFast
 from .chunking_base_splitter import CBaseChunkSplitter
+from .chunking_semantic_text_splitter import CSemanticTextSplitter
