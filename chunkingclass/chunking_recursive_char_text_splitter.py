@@ -11,6 +11,8 @@ Description:
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from .chunking_base_splitter import CBaseChunkSplitter
+from typing import List
+from langchain_core.documents import Document
 
 class CRecursiveCharTextSplitter(CBaseChunkSplitter):
 

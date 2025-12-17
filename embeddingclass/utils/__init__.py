@@ -1,0 +1,1 @@
+from .utils_normalize import l2_normalize
