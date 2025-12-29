@@ -12,7 +12,6 @@ from chunkingclass import (
     CSemanticTextSplitter,
 )
 
-from embeddingclass import CEmbeddingOpenAI
 from dotenv import load_dotenv
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -26,7 +25,10 @@ if __name__=='__main__':
     load_dotenv()    
     DOCFILEPATH = './data/input.txt'
     with open(DOCFILEPATH, "r", encoding='utf-8') as f:
-        docs = f.read()
+        lines = f.read()
     
     splitter = CSemanticTextSplitter(chunk_size=500,chunk_overlap=100)
+    docs = lines.split('\n')
+    print(type(docs))
     result = run_chunking(splitter,docs)
+    print(result)

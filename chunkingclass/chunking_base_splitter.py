@@ -8,5 +8,5 @@ from langchain_core.documents import Document
 class CBaseChunkSplitter(ABC):
 
     @abstractmethod
-    def create_document(self, contents: str) -> List[Document]:
+    def create_document(self, contents: list[str]) -> List[Document]:
         ...

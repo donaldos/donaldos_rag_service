@@ -1,6 +1,6 @@
-from embeddingclass.embedders.embedder_openai import OpenAIEmbedder
-from embeddingclass.embedders.embedder_hf import HuggingFaceEmbedder
-from embeddingclass.retrieval.retrieval_similarity_ranker import SimilarityRanker
+from embeddingclass import OpenAIEmbedder
+from embeddingclass import HuggingFaceEmbedder
+#from embeddingclass.retrieval.retrieval_similarity_ranker import SimilarityRanker
 from dotenv import load_dotenv
 
 load_dotenv()

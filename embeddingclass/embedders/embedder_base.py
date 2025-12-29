@@ -25,7 +25,7 @@ DocLike = Union[str, Document]
 
 """
 
-class Embedder(Protocol):
+class EmbedderBase(Protocol):
     """
     행동 기반 추상화: 이 두 메서드를 제공할 수 있다면 그 객체는 Embedder   
     Protocol = “상속 없는 인터페이스” -> Java / C++의 interface와 개념적으로 동일

@@ -34,7 +34,8 @@ class CSemanticTextSplitter(CBaseChunkSplitter):
             breakpoint_threshold_amount=70, # 70th percentile, 70% 이상의 유사도를 가진 문장 간에는 청크를 나누지 않고 함께 묶는다. 그 이후는 분리된다.               
         )
     
-    def create_document(self,contents: str):
+    def create_document(self,contents: list[str]):
         # SemanticChunker.create_documents returns List[Document]
-        texts = self.text_splitter.create_documents([contents])
+        print(type(contents))
+        texts = self.text_splitter.create_documents(contents)
         return texts
