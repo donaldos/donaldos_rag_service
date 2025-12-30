@@ -83,7 +83,8 @@ class FaissDriver(VectorStoreDriver):
         index_to_docstore_id: Dict[int, str] = {}
 
         return FAISS(
-            embedding_function=embeddings,
+            #embedding_function=embeddings,
+            embedding=embeddings,
             index=index,
             docstore=docstore,
             index_to_docstore_id=index_to_docstore_id,
@@ -95,7 +96,8 @@ class FaissDriver(VectorStoreDriver):
     # ---- VectorStoreDriver API ----
 
     def add_documents(self, docs: Sequence[Document]) -> List[str]:
-        ids = self._vs.add_documents(list(docs))
+        #ids = self._vs.add_documents(list(docs))
+        ids = self._vs.add_documents(docs)
         if self._auto_persist:
             self._save()
         return ids

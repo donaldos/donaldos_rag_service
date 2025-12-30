@@ -6,7 +6,7 @@ Description: Embedder Base Class
  - 임베딩 제공자를 교체 가능하게 만들기 위한 추상화
 """
 from __future__ import annotations
-from typing import Protocol, List, Sequence, Union
+from typing import Protocol, List, Sequence, Union, runtime_checkable
 from langchain_core.documents import Document
 
 """
@@ -24,7 +24,7 @@ DocLike = Union[str, Document]
 추상 클래스(ABC) 대신 Protocol을 쓴 이유는
 
 """
-
+@runtime_checkable
 class EmbedderBase(Protocol):
     """
     행동 기반 추상화: 이 두 메서드를 제공할 수 있다면 그 객체는 Embedder   

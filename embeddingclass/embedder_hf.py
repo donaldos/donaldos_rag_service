@@ -1,16 +1,11 @@
 from __future__ import annotations
-from typing import List, Sequence, Union, Optional
+from typing import List, Sequence
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
-from langchain_huggingface.embeddings import HuggingFaceEndpointEmbeddings
 from langchain_core.documents import Document
+from embeddingclass.embedder_base import EmbedderBase, DocLike
 
-from embeddingclass.embedders.embedder_base import DocLike
 
-class HuggingFaceEmbedder:
-    """
-    - E5 계열이면 query/passage prefix를 권장
-    - normalize_embeddings=True면 이미 정규화된 벡터가 나옴
-    """
+class HuggingFaceEmbedder(EmbedderBase):
     def __init__(
         self,
         model_name: str,

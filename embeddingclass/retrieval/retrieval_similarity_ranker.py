@@ -3,7 +3,7 @@ from typing import List, Dict, Sequence, Union, Optional
 from langchain_core.documents import Document
 import numpy as np
 
-from embeddingclass.embedders.embedder_base import EmbedderBase, DocLike
+from embeddingclass.embedder_base import EmbedderBase, DocLike
 
 class SimilarityRanker:
     """

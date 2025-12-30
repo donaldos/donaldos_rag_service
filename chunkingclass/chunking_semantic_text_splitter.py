@@ -35,7 +35,6 @@ class CSemanticTextSplitter(CBaseChunkSplitter):
         )
     
     def create_document(self,contents: list[str]):
-        # SemanticChunker.create_documents returns List[Document]
-        print(type(contents))
+        # SemanticChunker.create_documents returns List[Document]        
         texts = self.text_splitter.create_documents(contents)
         return texts
