@@ -15,7 +15,7 @@ from langchain_core.documents import Document
 from typing import List
 
 class CCharTextSplitter(CBaseChunkSplitter):
-    def __init__(self,chunk_size: int=210, chunk_overlap: int=0):
+    def __init__(self,chunk_size: int=220, chunk_overlap: int=0):
         """
         CCharTextSplitter 함수 생성
         Args:

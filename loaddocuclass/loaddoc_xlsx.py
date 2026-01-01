@@ -1,6 +1,8 @@
 import pandas as pd
-
-class ExcelDocumentLoader(BaseDocumentLoader):
+from .loaddoc_base import CBaseDocumentLoader
+from typing import List
+from langchain_core.documents import Document   
+class CExcelDocumentLoader(CBaseDocumentLoader):
     def load(self, path: str) -> List[Document]:
         sheets = pd.read_excel(path, sheet_name=None)
         docs = []

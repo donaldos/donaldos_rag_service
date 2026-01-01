@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 from langchain_core.documents import Document
 
-class BaseDocumentLoader(ABC):
+class CBaseDocumentLoader(ABC):
     """
     원문 파일을 List[Document]로 변환하는 공통 인터페이스
     """

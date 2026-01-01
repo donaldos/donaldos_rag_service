@@ -1,3 +1,12 @@
+"""
+Author: Donaldos
+Date: 2025-12-30
+
+Description: 
+RAG (Retrieval-Augmented Generation) 기반의 문서 검색 시스템을 구현한 코드입니다.
+
+"""
+
 from chunkingclass import ( 
     CBaseChunkSplitter, 
     CCharTextSplitter, 
@@ -11,6 +20,7 @@ from chunkingclass import (
     CGPT2TokenizerFast,                         # Not completed
     CSemanticTextSplitter,
 )
+
 from embeddingclass.embedder_base import EmbedderBase, DocLike
 from embeddingclass import create_embedder
 from embeddingclass.lc_adapter import LCEmbeddingAdapter
