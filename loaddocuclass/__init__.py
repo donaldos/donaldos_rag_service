@@ -1,19 +1,18 @@
-from .loaddoc_base import BaseDocumentLoader
-from .loaddoc_pdf import PDFDocumentLoader
-from .loaddoc_text import TextDocumentLoader
-from .loaddoc_docx import DocxDocumentLoader
-from .loaddoc_xlsx import ExcelDocumentLoader
-from .loaddoc_thml import HTMLDocumentLoader
-from .loaddoc_json import JSONDocumentLoader
-from .loaddoc_factory import DocumentLoaderFactory
+from .loaddoc_base import CBaseDocumentLoader
+from .loaddoc_pdf import CPDFDocumentLoader
+from .loaddoc_text import CTextDocumentLoader
+from .loaddoc_docx import CDocxDocumentLoader
+from .loaddoc_xlsx import CExcelDocumentLoader
+from .loaddoc_html import CHTMLDocumentLoader
+from .loaddoc_json import CJSONDocumentLoader
+from .loaddoc_factory import CDocumentLoaderFactory
 
-__all__ = [
-    "BaseDocumentLoader",
-    "PDFDocumentLoader",
-    "TextDocumentLoader",
-    "DocxDocumentLoader",
-    "ExcelDocumentLoader",
-    "HTMLDocumentLoader",
-    "JSONDocumentLoader",
-    "DocumentLoaderFactory",
+__all__ = [    
+    "CPDFDocumentLoader",
+    "CTextDocumentLoader",
+    "CDocxDocumentLoader",
+    "CExcelDocumentLoader",
+    "CHTMLDocumentLoader",
+    "CJSONDocumentLoader",
+    "CDocumentLoaderFactory",
 ]
