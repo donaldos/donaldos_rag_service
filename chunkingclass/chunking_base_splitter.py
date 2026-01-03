@@ -11,6 +11,7 @@ from abc import ABC, abstractmethod
 from typing import List
 from langchain_core.documents import Document
 
+# ABC : Abstract Base Class(추상 베이스 클래스)
 class CBaseChunkSplitter(ABC):
     """
     텍스트 청킹(Chunking)을 위한 추상 베이스 클래스.

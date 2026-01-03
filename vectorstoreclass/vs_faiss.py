@@ -83,8 +83,8 @@ class FaissDriver(VectorStoreDriver):
         index_to_docstore_id: Dict[int, str] = {}
 
         return FAISS(
-            #embedding_function=embeddings,
-            embedding=embeddings,
+            embedding_function=embeddings,
+            #embedding=embeddings,
             index=index,
             docstore=docstore,
             index_to_docstore_id=index_to_docstore_id,

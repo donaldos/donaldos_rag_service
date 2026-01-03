@@ -1,0 +1,15 @@
+기술경력서
+[핵심역량]
+1. 개발언어
+○ Python(주력): FastAPI 기반 API서비스, 데이터처리, 모델링, 실험자동화
+○ C++/Java(실무): cocos2dx 개발플랫폼 내 로직구현
+○ JavaScript(경험): 관리도구/대시보드, 프론트 연동
+2. 개발플랫폼/프레임워크
+○ Backend: FastAPI, Websocket, REST 설계/운영
+○ AI/ML: Pytorch, Whisper/Kaldi 기반 ASR 파이프라인, RAG, HuggingFace
+3. 커뮤니케이션/협업툴
+○ Issue/Project: JIRA
+○ Docs: Notion, Confluence, Google Docs
+○ Chat/Meeting: Slack/Teams
+...
+(이하 원문 전체 텍스트 동일)

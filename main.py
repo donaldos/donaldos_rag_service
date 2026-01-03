@@ -148,10 +148,6 @@ if __name__=='__main__':
     duration = time.time() - start_time
     print(f"7️⃣ Retriever 생성	{duration:.2f}초")
 
-
-    query_text = "구글이 얼마 주기로 했는가?"
-
-
     # 8️⃣ VectorStore 리트리버 검색
     '''
     8️⃣ RAG 체인 구성
