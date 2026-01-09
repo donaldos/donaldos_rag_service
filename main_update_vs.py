@@ -1,7 +1,17 @@
 import time
 from dotenv import load_dotenv
 from typing import Union, Sequence, List
+from loggerproc import setup_logger
+import os
+logger = setup_logger("rag_service")
 
+"""
+logger.debug("디버그 메시지")
+logger.info("문서 로드 완료")
+logger.warning("청크 크기가 너무 큽니다")
+logger.error("벡터 저장 실패")
+logger.exception("예외 발생")
+"""
 
 """
 Factory 패턴
@@ -76,43 +86,39 @@ from chunking_splitter_reg import create_splitter
 
 
 
-def build_indexing_context():
+def build_indexing_context(chunking_type: str, embedder_type: str, backend: str):
     load_dotenv()
 
-    # 1) 청킹 단계 준비: ChunkSplitter 생성
-    """
-    "char": CCharTextSplitter,
-    "recursive_char": CRecursiveCharTextSplitter,
-    "tiktoken": CTiktokenTextSplitter,
-    "token": CTokenTextSplitter,
-    "spacy": CSpacyTextSplitter,
-    "sentence_transformers": CSentenceTransformersTokenTextSplitter,
-    "semantic": CSemanticTextSplitter,
-    "clause": CClauseTextSplitter,
-    "header": CHeaderTextSplitter,
-    """    
     splitter = create_splitter(
-        "header",                 # splitter type
+        chunking_type,               # splitter type
         #chunk_size=500,                   # chunk size
         #chunk_overlap=100,                # chunk overlap
     )
 
     # 2) 임베딩 엔진 준비: 임베더 생성
-    embedder = create_embedder(
-        "hf",                           # hf / openai / other
-        model_name="BAAI/bge-m3",       # 모델명
-        device="mps",                   # cpu/gpu/mps
-        normalize_embeddings=True,      # cosine similarity 최적화   
-        use_e5_prefix=False,
+    if embedder_type == "hf":
+        embedder = create_embedder(
+            "hf",                           # hf / openai / other
+            model_name="BAAI/bge-m3",       # 모델명
+            device="mps",                   # cpu/gpu/mps
+            normalize_embeddings=True,      # cosine similarity 최적화   
+            use_e5_prefix=False,
+        )
+    elif embedder_type == "openai":
+        embedder = create_embedder(
+            "openai",                 # "hf" → "openai"
+            model_name="text-embedding-3-large",            
+            api_key=os.environ["OPENAI_API_KEY"],
     )
     # LangChain VectorStore가 요구하는 Embeddings 인터페이스로 변환
     # 👉 Adapter Pattern
     lc_emb = LCEmbeddingAdapter(embedder)
 
     # 3) VectorStore 준비: VectorStoreConfig 생성
+    persist_dir = "./vectorstore/vs_" + backend + "_" + embedder_type + "_" + chunking_type
     cfg = VectorStoreConfig(
-        backend="faiss",                # faiss / chroma / pinecone
-        persist_dir="./vs_faiss",       # 로컬 저장 경로: 디스크에 인덱스 저장
+        backend=backend,                # faiss / chroma / pinecone
+        persist_dir=persist_dir,       # 로컬 저장 경로: 디스크에 인덱스 저장
         collection="my_docs",           # Chroma/Pinecone에서 주로 사용
         k=5,                            # 검색할 문서 수
         search_type="similarity",       # similarity / exact
@@ -147,16 +153,31 @@ def index_one_file(vs, splitter, doc_path: str):
 
 
 if __name__ == "__main__":
-    vs, splitter = build_indexing_context()
-    
-    files = [
-        "./data/SPRI_Report.pdf",
-        "./data/input.txt",
-        "./data/finance.txt",
-    ]
 
-    for f in files:
-        start = time.time()
-        ids = index_one_file(vs, splitter, f)
-        print(f"✅ {f} 인덱싱 완료: {len(ids)}개\t{time.time()-start:.2f}초")
+    # 1) 청킹 단계 준비: ChunkSplitter 생성
+    #chunking_types = ["char","recursive_char","tiktoken","token","spacy","sentence_transformers","semantic","clause","header"]
+    chunking_types = ["char","recursive_char","tiktoken","token","spacy","semantic","clause","header"]
+    embedder_types = ["hf","openai"]
+    beckend_types = ["faiss","chroma"] #,"pinecone"]
+
+    for chunking_type in chunking_types:
+        for embedder_type in embedder_types:
+            for beckend_type in beckend_types:
+                logger.info(f"청킹 타입: {chunking_type}\t임베딩 타입: {embedder_type}\t벡터 저장 타입: {beckend_type}") 
+                vs, splitter = build_indexing_context(chunking_type, embedder_type, beckend_type)
+                files = [
+                    "./data/SPRI_Report.pdf",
+                    "./data/input.txt",
+                    "./data/finance.txt",
+                    "./data/2019_01_stockconsert_databook.pdf",
+                ]
+
+                for f in files:
+                    start = time.time()
+                    ids = index_one_file(vs, splitter, f)
+                    logger.info(f"✅ {f} 인덱싱 완료: {len(ids)}개\t{time.time()-start:.2f}초")    
+
+    
+
+    
     

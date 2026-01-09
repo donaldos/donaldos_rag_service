@@ -53,8 +53,8 @@ def run_embedding(embedder: EmbedderBase, chunks: List[Document]) -> List[List[f
 
 if __name__=='__main__':
     load_dotenv()
-    DOCFILEPATH = './data/SPRI_Report.pdf'    
-    query_text = "구글이 얼마 주기로 했는가?"
+    DOCFILEPATH = './data/2019_제1회_증시콘서트_자료집_최종.pdf'    
+    query_text = "미국 자산시장의 방향을 좌우하는 주요 요인은 무엇인가?"
     
     '''
     1️⃣ 문서 로드 (Load / Parse)
@@ -64,7 +64,7 @@ if __name__=='__main__':
     start_time = time.time()
     docs = CDocumentLoaderFactory().load(DOCFILEPATH)
     duration = time.time() - start_time
-    print(f"1️⃣ 문서 로드: {type(docs)}\t{type(docs[0])}\t{duration:.2f}초")
+    print(f"1️⃣ 문서 로드: {type(docs)}\t{type(docs[0])}\t{len(docs)}\t{duration:.2f}초")
 
     # 2️⃣ 텍스트 청킹: texts: List[Document] (청킹 결과)
     '''
@@ -73,7 +73,7 @@ if __name__=='__main__':
     List[Document] → List[Document]
     '''
     start_time = time.time()
-    splitter = CSemanticTextSplitter(chunk_size=500, chunk_overlap=100)
+    splitter = CRecursiveCharTextSplitter(chunk_size=500, chunk_overlap=100)
     texts = run_chunking(splitter, docs)     # List[Document] 반환
     duration = time.time() - start_time
     print(f"2️⃣ 텍스트 splitt and chunking: {type(texts)}\t{type(texts[0])}\t{duration:.2f}초")  
@@ -90,7 +90,7 @@ if __name__=='__main__':
         model_name="BAAI/bge-m3",
         device="mps",
         normalize_embeddings=True,
-        use_e5_prefix=False,
+        use_e5_prefix=True,
     )
     lc_emb = LCEmbeddingAdapter(embedder)
     duration = time.time() - start_time

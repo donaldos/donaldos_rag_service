@@ -8,7 +8,7 @@ from embeddingclass.embedder_base import EmbedderBase, DocLike
 class OpenAIEmbedder(EmbedderBase):
     def __init__(
         self,
-        model: str = "text-embedding-3-large",
+        model_name: str = "text-embedding-3-large",
         api_key: str | None = None,
         base_url: str | None = None,
     ):
@@ -18,7 +18,7 @@ class OpenAIEmbedder(EmbedderBase):
         if base_url is not None:
             kwargs["base_url"] = base_url
 
-        self._emb = OpenAIEmbeddings(model=model, **kwargs)
+        self._emb = OpenAIEmbeddings(model=model_name, **kwargs)
 
     def embed_query(self, text: str) -> List[float]:
         return self._emb.embed_query(text)

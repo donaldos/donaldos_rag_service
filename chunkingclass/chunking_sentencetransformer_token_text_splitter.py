@@ -22,5 +22,5 @@ class CSentenceTransformersTokenTextSplitter(CBaseChunkSplitter):
     def create_document(self,contents: str):
         count_start_and_stop_tokens = 2
         text_token_count = self.text_splitter.count_tokens(text=contents) - count_start_and_stop_tokens
-        texts = self.text_splitter.create_documents([contents])
+        texts = self.text_splitter.create_documents(contents)
         return texts

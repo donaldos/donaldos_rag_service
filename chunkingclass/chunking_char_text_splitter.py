@@ -37,5 +37,6 @@ class CCharTextSplitter(CBaseChunkSplitter):
         Returns:
             List[Document]: texts
         """
-        texts = self.text_splitter.create_documents([contents])
+        #texts = self.text_splitter.create_documents([contents])
+        texts = self.text_splitter.create_documents(contents)
         return texts

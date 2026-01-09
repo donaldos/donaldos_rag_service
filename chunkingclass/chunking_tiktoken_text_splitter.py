@@ -29,5 +29,6 @@ class CTiktokenTextSplitter(CBaseChunkSplitter):
         )
     
     def create_document(self,contents: str):
-        texts = self.text_splitter.create_documents([contents])
+        #texts = self.text_splitter.create_documents([contents])
+        texts = self.text_splitter.create_documents(contents)
         return texts
